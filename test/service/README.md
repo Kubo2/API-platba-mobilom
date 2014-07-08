@@ -1,0 +1,2 @@
+Testy triedy PlatbaMobilom
+====================
