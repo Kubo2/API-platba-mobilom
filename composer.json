@@ -1,0 +1,10 @@
+{
+	"config": 
+	{
+		"vendor-dir": "source/stuff"
+	},
+	"require": 
+	{
+		"nette/utils": "2.2.1"
+	}
+}
