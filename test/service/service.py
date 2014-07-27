@@ -119,13 +119,17 @@ attrs = []
 print("\nPrvé volanie skriptu na serveri partnera...")
 try:
 	# priajtie 1
-	httpreq.urlopen(recuri)
+	request = httpreq.urlopen(recuri)
 	print(" * %s .. 1" % recuri)
+	result = request.read().decode()
+	print("\n===Response:\n%s\n" % result)
+	
 	try:
 		aparseuri = builduri.extendquery(parseuri, {GET_RESULT: 'OK'})
-		httpreq.urlopen(aparseuri)
+		request = httpreq.urlopen(aparseuri)
 		print(" * %s .. 1" % aparseuri)
-	except err:
+		print("\ntest (%s): %s\n" % ('{response} === "OK"', request.read().decode() == 'OK'))
+	except:
 		raise
 except:
 	print("Chyba: Prvé volanie skončilo chybou")
@@ -133,12 +137,17 @@ except:
 print("\nDruhé volanie skriptu na serveri partnera...")
 try:
 	# priajtie 2
-	httpreq.urlopen(recuri)
+	request = httpreq.urlopen(recuri)
 	print(" * %s .. 1" % recuri)
+	result = request.read().decode()
+	print("\n===Response:\n%s\n" % result)
+	
 	try:
 		bparseuri = builduri.extendquery(parseuri, {GET_RESULT: 'FAIL'})
-		httpreq.urlopen(bparseuri)
+		request = httpreq.urlopen(bparseuri)
 		print(" * %s .. 1" % bparseuri)
+		#print(request.read().decode())
+		print("\ntest (%s): %s\n" % ('{response} === "FAIL"', request.read().decode() == 'FAIL'))
 	except err:
 		raise
 except:

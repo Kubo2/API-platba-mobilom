@@ -1,0 +1,9 @@
+
+Options +FollowSymLinks
+
+# Smerovanie URL na skript pm-test.php
+#
+
+RewriteEngine On
+#RewriteBase /adresar
+RewriteRule . pm-test.php [QSA,L]

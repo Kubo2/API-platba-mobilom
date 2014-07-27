@@ -27,6 +27,7 @@ class PlatbaMobilom extends IntellObject {
 	void handle()
 	void setReceiveHandler(callback $handler)
 	void setParseHandler(callback $handler)
+	static FeedBack createFeedBack()
 }
 
 ```
@@ -40,17 +41,39 @@ Implementácia
 ```php
 <?php
 
+require "source/PlatbaMobilom/PlatbaMobilom.php";
+use PlatbaMobilom\PlatbaMobilom;
+
 $service = new PlatbaMobilom('/prijatie', '/spracovanie', 'app');
-$service->receiveHandler = function($phoneNo, $messageText) {
+
+/**
+ * Receive handler. First URL - see docs.
+ *
+ * @param int   phone number of customer
+ * @param string   the text of message customer sent, without leading application keyword
+ * @param string(40)   sha-1 hash of received identifier
+ * @return PlatbaMobilom\FeedBack   instance of FeedBack carriage
+ */
+$service->receiveHandler = function($phoneNo, $messageText, $identifier) {
 	// prijatie správy
 	// návratová hodnota musí byť PlatbaMobilom\FeedBack
 	// PlatbaMobilom::createFeedBack(string $message [, float $price = 0.0 ])
 	return PlatbaMobilom::createFeedBack("Dakujeme za Vasu SMS spravu.");
 };
 
-$service->parseHandler = function($result) {
+
+/**
+ * Parse handler. Second URL.
+ *
+ * @param string   Either one of PlatbaMobilom::RESULT_OK or PlatbaMobilom::RESULT_ERROR constants
+ * @param string(40)   sha-1 hash of received identifier
+ * @return bool   true if parse was successful, false otherwise
+ */
+$service->parseHandler = function($result, $identifier) {
 	// spracovanie platby
-}
+};
+
+$service->handle();
 
 
 ?>
