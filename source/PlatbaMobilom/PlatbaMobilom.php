@@ -14,6 +14,7 @@ namespace {
 
 	/**
 	 * @example test/service/pm-test.php
+	 * @deprecated
 	 */
 	class PlatbaMobilom extends Object implements IDaemon {
 		const SERVICE_IP = '109.74.149.29';
