@@ -18,12 +18,12 @@ __doc__ = """
 # req.urlopen("http://localhost:80/projects/platba-mobilom/test/prijatie.php?id=nejake-idecko&msisdn=0910253030&text=ac+Kubo2+vip")
 
 from sys import stdin, stdout, stderr, argv
-import builduri
 import urllib.request as httpreq
 import os.path
 import random
 
 import servicehelper
+import builduri
 
 if __name__ != "__main__" :
 	raise NameError("Služba PlatbaMobilom nie je znovupoužiteľný modul.")
